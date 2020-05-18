@@ -24,11 +24,10 @@ class AmazonSpiderSpider(scrapy.Spider):
         items['product_category'] = product_category
         items['product_price'] = product_price
         items['product_imagelink'] = product_imagelink
-        
         yield items
 
         next_page = 'https://www.amazon.com/s?i=electronics&bbn=6459737011&rh=n%3A172282%2Cn%3A493964%2Cn%3A1266092011%2Cn%3A172659%2Cn%3A6459737011%2Cp_n_feature_keywords_three_browse-bin%3A19205588011%7C7688788011&dc&page='+ str(AmazonSpiderSpider.page_number) + '&fst=as%3Aoff&qid=1589583281&rnid=7688787011&ref=sr_pg_'+ str(AmazonSpiderSpider.page_number) + ''
-        if AmazonSpiderSpider.page_number is not None:
+        if AmazonSpiderSpider.page_number <=30:
             AmazonSpiderSpider.page_number +=1
             yield response.follow(next_page,callback = self.parse)
         
